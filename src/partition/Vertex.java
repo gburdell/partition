@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 karlp.
+ * Copyright 2014 gburdell.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package kwp.partition;
+package partition;
 
 /**
  * Graph Vertex.
- * @author karlp
+ * @author gburdell
  */
 public class Vertex {
     

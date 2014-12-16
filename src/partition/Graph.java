@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 karlp.
+ * Copyright 2014 gburdell.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package kwp.partition;
+package partition;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -32,12 +32,12 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import kwp.partition.Util.Pair;
+import partition.Util.Pair;
 
 /**
  * Undirected graph.
  *
- * @author karlp
+ * @author gburdell
  */
 public class Graph {
 

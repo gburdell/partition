@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 karlp.
+ * Copyright 2014 gburdell.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package kwp.partition;
+package partition;
 
 /**
- * Graph edge.
- * @author karlp
+ *
+ * @author gburdell
  */
-public class Edge {
-    
+public class Util {
+    public static void error(String msg, boolean doExit) {
+        System.err.println("Error: " + msg);
+        if (doExit) {
+            System.exit(1);
+        }
+    }
+    public static void error(String msg) {
+        error(msg, true);
+    }
+    public static class Pair<T1,T2> {
+        public Pair() {
+            first = null;
+            second = null;
+        }
+        public Pair(T1 first, T2 second) {
+            this.first = first;
+            this.second = second;
+        }
+        public final T1 first;
+        public final T2 second; 
+    }
 }
+    
