@@ -1,0 +1,26 @@
+// A test graph for partition
+
+nameMap {
+	1 a 2 b 3 c 4 d
+	5 u1 6 u2 7 u3
+	8 m2
+	9 long_net1
+	10 very_long_net2
+}
+cell #5 {
+	id: 1;
+	design: m1;
+	leafCnt: 1000;
+	area: 1234.0
+}
+cell #6/#7[5] {
+	id: 2;
+	design: #8;
+	leafCnt: 10000;
+	area: 567e4;
+}
+edges {
+	n1[0]: 1,2;
+	n1_n2/n4[9]: 1;
+	#9/#10[31]: 2
+}
