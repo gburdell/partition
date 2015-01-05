@@ -42,10 +42,12 @@ import java.util.List;
 import java.util.Map;
 import partition.Graph;
 import partition.Name;
+import partition.PartitionException;
 import static partition.Util.error;
 import partition.Vertex;
 import partition.pgparse.generated.BitSelect;
 import partition.pgparse.generated.CellBodyItem;
+import partition.pgparse.generated.CellEntry;
 import partition.pgparse.generated.CellName;
 import partition.pgparse.generated.FullName;
 import partition.pgparse.generated.Grammar;
@@ -62,10 +64,13 @@ import partition.pgparse.generated.PgName;
  */
 public class Parser {
 
-    public static Graph create(final String fname) {
+    public static Graph create(final String fname) throws PartitionException {
         Parser parser = new Parser();
         parser.addListeners();
         final boolean ok = parser.parse(fname);
+        if (ok) {
+            parser.m_graph.setVerticesById();
+        }
         return ok ? parser.m_graph : null;
     }
 
@@ -130,6 +135,9 @@ public class Parser {
                             if (0 <= m_vx.getId()) {
                                 error("PG-VX-2", getMark(), "id", m_vx.getId());
                             }
+                            if (0 >= ival) {
+                                error("PG-VX-4", getMark(), ival);
+                            }
                             m_vx.setId(ival);
                             break;
                         case 1: //leafCnt
@@ -150,6 +158,26 @@ public class Parser {
                 break;
                 default:
                     assert false;
+            }
+        });
+        CellEntry.addListener((Acceptor accepted) -> {
+            m_acc = accepted;
+            final String cellNm = m_vx.getName().toString();
+            //check a few things
+            if (0 > m_vx.getId()) {
+                error("PG-VX-3", getMark(), "id", cellNm);
+            }
+            if (0 > m_vx.getLeafCnt()) {
+                error("PG-VX-3", getMark(), "leafCnt", cellNm);
+            }
+            if (0 > m_vx.getMacroCnt()) {
+                error("PG-VX-3", getMark(), "macroCnt", cellNm);
+            }
+            if (0f > m_vx.getArea()) {
+                error("PG-VX-3", getMark(), "area", cellNm);
+            }
+            if (null == m_vx.getDesignName()) {
+                error("PG-VX-3", getMark(), "design", cellNm);
             }
         });
     }

@@ -32,7 +32,9 @@ public class PartitionException extends Throwable {
         m_msgCode = msgCode;
         m_msgArgs = args;
     }
-    
+    public void asError() {
+        Util.errora(m_msgCode, m_msgArgs);
+    }
     private final String    m_msgCode;
     private final Object    m_msgArgs[];
 }

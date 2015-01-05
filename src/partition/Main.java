@@ -24,6 +24,8 @@
 package partition;
 
 import gblib.MessageMgr;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import partition.pgparse.Parser;
 import static partition.Util.error;
 
@@ -37,9 +39,14 @@ public class Main {
     }
 
     private void process(final String argv[]) {
-        m_graph = Parser.create(argv[0]);
-        if (null == m_graph) {
-            error("PG-CREATE-1");
+        try {
+            m_graph = Parser.create(argv[0]);
+            if (null == m_graph) {
+                error("PG-CREATE-1");
+            }
+        } catch (PartitionException ex) {
+            ex.asError();
+            assert false;//never get here
         }
     }
     

@@ -11,12 +11,14 @@ cell #5 {
 	id: 1;
 	design: m1;
 	leafCnt: 1000;
+	macroCnt: 0;
 	area: 1234.0
 }
 cell #6/#7[5] {
 	id: 2;
 	design: #8;
 	leafCnt: 10000;
+	macroCnt: 10;
 	area: 567e4;
 }
 edges {

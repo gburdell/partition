@@ -28,22 +28,28 @@ package partition;
  * @author gburdell
  */
 public class Util {
+
     public static void error(String msg, Object... args) {
+        errora(msg, args);
+    }
+
+    public static void errora(String msg, Object args[]) {
         gblib.MessageMgr.message('E', msg, args);
         System.exit(2);
     }
 
-    public static class Pair<T1,T2> {
+    public static class Pair<T1, T2> {
+
         public Pair() {
             first = null;
             second = null;
         }
+
         public Pair(T1 first, T2 second) {
             this.first = first;
             this.second = second;
         }
         public final T1 first;
-        public final T2 second; 
+        public final T2 second;
     }
 }
-    

@@ -44,8 +44,34 @@ public class Graph {
         m_vxByName.put(vx.getName(), vx);
         return true;
     }
+    
+    public void setVerticesById() throws PartitionException {
+        if (null != m_vxById) {
+            gblib.Util.abnormalExit("m_vxById already set");
+        }
+        int maxId = -1;
+        for (Vertex vx : m_vxByName.values()) {
+            if (maxId < vx.getId()) {
+                maxId = vx.getId();
+            }
+        }
+        //a sanity check
+        if (maxId != m_vxByName.size()) {
+            throw new PartitionException("PG-CREATE-2", maxId, m_vxByName.size());
+        }
+        m_vxById = new Vertex[maxId+1];
+        for (Vertex vx : m_vxByName.values()) {
+            m_vxById[vx.getId()] = vx;
+        }
+        //[0] refers to (virtual) ports and not user set
+        assert (null == m_vxById[0]);
+    }
     /**
      * Vertices by name,
      */
     private final Map<Name,Vertex>    m_vxByName = new HashMap<>();
+    /**
+     * Vertices by id (which is reference in edge set).
+     */
+    private Vertex  m_vxById[];
 }

@@ -2,6 +2,11 @@ PGP-MAP-1 %s: duplicate entry for key '%d'
 PGP-MAP-2 %s: map does not contain key '%d'
 
 PG-CREATE-1 Could not create graph
+PG-CREATE-2 Max cell/vertex ID was %d, expected %d
+
 PG-ERR-1 Cannot continue due to previous error(s)
+
 PG-VX-1 %s: cell/vertex with name '%s' already exists
 PG-VX-2 %s: field '%s' already set to '%s'
+PG-VX-3 %s: field '%s' was not set for cell/vertex '%s'
+PG-VX-4 %s: field 'id' value %d must be > 0
