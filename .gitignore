@@ -1,2 +1,3 @@
-/pgparse/nbproject/private/
-/pgparse/build/
+/build/
+/dist/
+/src/partition/pgparse/generated/

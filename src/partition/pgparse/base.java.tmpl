@@ -17,12 +17,26 @@ public @11@ class @2@ extends @3@ {
     public @2@() {
     }
 
+	/**
+	* Match text here.
+	*/
+	private String m_text;
+
+	@Override
+	public String toString() {
+		return m_text;
+	}
+
     @Override
     protected boolean accepti() {
 		Acceptor matcher = @8@ ;
 		m_baseAccepted = match(matcher);
 		boolean match = (null != m_baseAccepted);
 @6.2@
+		if (match) {
+			//dont need any lead/trail whitespace
+			m_text = super.toString().trim();
+		}
         if (match && (null != getListeners())) {
             for (Listener cb : getListeners()) {
                 cb.onAccept(m_baseAccepted);

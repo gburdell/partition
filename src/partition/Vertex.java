@@ -28,5 +28,56 @@ package partition;
  * @author gburdell
  */
 public class Vertex {
+    public Vertex(final Name name) {
+        m_name = name;
+    }
+
+    public float getArea() {
+        return m_area;
+    }
+
+    public int getId() {
+        return m_id;
+    }
+
+    public int getLeafCnt() {
+        return m_leafCnt;
+    }
+
+    public int getMacroCnt() {
+        return m_macroCnt;
+    }
+
+    public Name getName() {
+        return m_name;
+    }
+
+    public Name getDesignName() {
+        return m_designName;
+    }
     
+    public void setArea(float m_area) {
+        this.m_area = m_area;
+    }
+
+    public void setId(int m_id) {
+        this.m_id = m_id;
+    }
+
+    public void setLeafCnt(int m_leafCnt) {
+        this.m_leafCnt = m_leafCnt;
+    }
+
+    public void setMacroCnt(int m_macroCnt) {
+        this.m_macroCnt = m_macroCnt;
+    }
+
+    public void setDesignName(Name m_designName) {
+        this.m_designName = m_designName;
+    }
+
+    private final Name    m_name;
+    private Name m_designName;
+    private int m_id = -1, m_leafCnt = -1, m_macroCnt = -1;
+    private float m_area = -1f;
 }

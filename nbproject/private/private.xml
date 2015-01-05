@@ -3,7 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/gburdell/projects/partition/src/partition/Edge.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/PartitionException.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/pgparse/generated/BitSelect.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/pgparse/generated/FullName.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/Main.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/pgparse/generated/CellName.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/Vertex.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/pgparse/Parser.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/pgparse/generated/PgFloat.java</file>
             <file>file:/home/gburdell/projects/partition/src/partition/Graph.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/Name.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/pgparse/generated/PgName.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/pgparse/generated/CellBodyItem.java</file>
         </group>
     </open-files>
 </project-private>

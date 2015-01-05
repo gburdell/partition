@@ -1,33 +1,38 @@
 // PEG grammar for partition graph used by apfe parser generator
 
 Grammar <- Spacing NameMap? CellEntry* Edges? EOF
-CellEntry <- CELL_K Name LCURLY CellBody RCURLY
+CellEntry <- CELL_K CellName LCURLY CellBody RCURLY
+CellName <- PgName
 CellBody <- (CellBodyItem Semi)*
-CellBodyItem <- DESIGN_K COLON Name
-              / AREA_K COLON Float
-		      / (ID_K / LEAFCNT_K / MACROCNT_K) COLON Integer
+CellBodyItem <- DESIGN_K COLON PgName
+              / AREA_K COLON PgFloat
+		      / (ID_K / LEAFCNT_K / MACROCNT_K) COLON PgInteger
 Edges <- EDGES_K LCURLY Edge* RCURLY
 
 // list of (edge/netname dest-cell-id+).  cellId 0 is port     
-Edge <- Name COLON Integer (COMMA Integer)* Semi
+Edge <- PgName COLON PgInteger (COMMA PgInteger)* Semi
 
 Semi <- (!RCURLY SEMI) / &RCURLY
 
 NameMap <- NAMEMAP_K LCURLY NameMapEntry* RCURLY
-NameMapEntry <- Integer Identifier
+NameMapEntry <- PgInteger Identifier
 
-Name <- FullName BitSelect?
+PgName <- FullName BitSelect? Spacing
 FullName <- NameEle ('/' NameEle)*
 
 //NOTE: no space for namemap index (e.g. '#10' not '# 10')
-NameEle <- '#' Integer / Identifier
+NameEle <- '#' PgInteger / IdentifierNS
 
-BitSelect <- LBRACK Integer RBRACK
+BitSelect <- LBRACK PgInteger RBRACK
 
 //Tokens 
-Integer <- [0-9]+ Spacing
-Float <- [0-9]+ ('.' [0-9]+)? ([eE] '-'? [0-9]+)? Spacing
+PgInteger <- [0-9]+ Spacing
+PgFloat <- [0-9]+ ('.' [0-9]+)? ([eE] '-'? [0-9]+)? Spacing
 Identifier <- IdentStart IdentCont* Spacing
+
+//Identifier - no spacing
+IdentifierNS <- IdentStart IdentCont*
+
 IdentStart <- [a-zA-Z_]
 IdentCont <- IdentStart / [0-9]
 

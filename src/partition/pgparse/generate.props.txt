@@ -9,7 +9,7 @@ genTerminal: false
 # Make sure to accomodate packageName.
 # E.g. if packageName is apfe.dsl.grammar, then
 # outputDir must end in /.../apfe/dsl/grammar.
-outputDir: src/partition/pgparse/generated
+outputDir: generated
 
 # package name (related to outputDir)
 packageName: partition.pgparse.generated

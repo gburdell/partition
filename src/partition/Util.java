@@ -28,15 +28,11 @@ package partition;
  * @author gburdell
  */
 public class Util {
-    public static void error(String msg, boolean doExit) {
-        System.err.println("Error: " + msg);
-        if (doExit) {
-            System.exit(1);
-        }
+    public static void error(String msg, Object... args) {
+        gblib.MessageMgr.message('E', msg, args);
+        System.exit(2);
     }
-    public static void error(String msg) {
-        error(msg, true);
-    }
+
     public static class Pair<T1,T2> {
         public Pair() {
             first = null;

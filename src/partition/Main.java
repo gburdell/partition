@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 gburdell.
+ * Copyright 2015 gburdell.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,29 +23,34 @@
  */
 package partition;
 
-import java.util.HashMap;
-import java.util.Map;
+import gblib.MessageMgr;
+import partition.pgparse.Parser;
+import static partition.Util.error;
 
 /**
- * Undirected graph.
  *
  * @author gburdell
  */
-public class Graph {
-    /**
-     * Add vertex to graph.
-     * @param vx vertex to add.
-     * @return true if added; else false if another vertex by same name exists,
-     */
-    public boolean addVertex(final Vertex vx) {
-        if (m_vxByName.containsKey(vx.getName())) {
-            return false;
-        }
-        m_vxByName.put(vx.getName(), vx);
-        return true;
+public class Main {
+    public static void main(final String argv[]) {
+        stTheOne.process(argv);
     }
-    /**
-     * Vertices by name,
-     */
-    private final Map<Name,Vertex>    m_vxByName = new HashMap<>();
+
+    private void process(final String argv[]) {
+        m_graph = Parser.create(argv[0]);
+        if (null == m_graph) {
+            error("PG-CREATE-1");
+        }
+    }
+    
+    private final static Main stTheOne = new Main();
+    
+    private Graph   m_graph;
+    
+    static {
+        final String fname = System.getProperty("partition.messages");
+        if (null != fname) {
+            MessageMgr.addMessages(fname);
+        }
+    }
 }

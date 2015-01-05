@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 gburdell.
+ * Copyright 2015 gburdell.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,42 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package partition.pgparse;
-
-import apfe.runtime.Acceptor;
-import apfe.runtime.CharBufState;
-import apfe.runtime.CharBuffer;
-import apfe.runtime.InputStream;
-import apfe.runtime.ParseError;
-import gblib.Util;
-import partition.pgparse.generated.Grammar;
+package partition;
 
 /**
- * Parse partition graph file.
  *
  * @author gburdell
  */
-public class Parser {
-
-    public static void main(final String argv[]) {
-        parse(argv[0]);
+public class PartitionException extends Throwable {
+    public PartitionException(final String msgCode, Object... args) {
+        m_msgCode = msgCode;
+        m_msgArgs = args;
     }
-
-    private static boolean parse(final String fname) {
-        boolean ok = false;
-        try {
-            //create buffer with no overhead
-            final CharBuffer cbuf = InputStream.create(fname, 0f);
-            final CharBufState cbufSt = CharBufState.create(cbuf);
-            Grammar gram = new Grammar();
-            Acceptor parseTree = gram.accept();
-            ok = (null != parseTree) && CharBufState.getTheOne().isEOF();
-            if (!ok) {
-                ParseError.printTopMessage();
-            }
-        } catch (Exception ex) {
-            Util.abnormalExit(ex);
-        }
-        return ok;
-    }
+    
+    private final String    m_msgCode;
+    private final Object    m_msgArgs[];
 }

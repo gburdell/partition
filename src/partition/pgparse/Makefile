@@ -11,5 +11,5 @@ generate.log: ${DEPS}
 	tail generate.log
 
 clean:
-	-rm -rf src/partition/pgparse/generated
+	-rm -rf generated
 	-rm -f generate.log
