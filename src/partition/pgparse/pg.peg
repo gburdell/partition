@@ -7,7 +7,11 @@ CellBody <- (CellBodyItem Semi)*
 CellBodyItem <- DESIGN_K COLON PgName
               / AREA_K COLON PgFloat
 		      / (ID_K / LEAFCNT_K / MACROCNT_K) COLON PgInteger
-Edges <- EDGES_K LCURLY Edge* RCURLY
+
+Edges <- EdgeStart LCURLY Edge* RCURLY
+
+//artifical nonterm to trigger callback
+EdgeStart <- EDGES_K
 
 // list of (edge/netname dest-cell-id+).  cellId 0 is port     
 Edge <- PgName COLON PgInteger (COMMA PgInteger)* Semi

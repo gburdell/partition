@@ -40,6 +40,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import partition.Graph;
 import partition.Name;
 import partition.PartitionException;
@@ -49,6 +51,7 @@ import partition.pgparse.generated.BitSelect;
 import partition.pgparse.generated.CellBodyItem;
 import partition.pgparse.generated.CellEntry;
 import partition.pgparse.generated.CellName;
+import partition.pgparse.generated.EdgeStart;
 import partition.pgparse.generated.FullName;
 import partition.pgparse.generated.Grammar;
 import partition.pgparse.generated.NameEle;
@@ -68,9 +71,6 @@ public class Parser {
         Parser parser = new Parser();
         parser.addListeners();
         final boolean ok = parser.parse(fname);
-        if (ok) {
-            parser.m_graph.setVerticesById();
-        }
         return ok ? parser.m_graph : null;
     }
 
@@ -113,7 +113,7 @@ public class Parser {
         CellBodyItem.addListener((Acceptor accepted) -> {
             m_acc = accepted;
             PrioritizedChoice opt = downCast(m_acc);
-            switch(opt.whichAccepted()) {
+            switch (opt.whichAccepted()) {
                 case 0: //design
                     Name val = m_vx.getDesignName();
                     if (null != val) {
@@ -129,7 +129,7 @@ public class Parser {
                     break;
                 case 2:    //id, {leaf,macro}cnt
                     int ival = toInt(extractEle(opt.getAccepted(), 2));
-                    PrioritizedChoice pc = extractEle(opt.getAccepted(),0);
+                    PrioritizedChoice pc = extractEle(opt.getAccepted(), 0);
                     switch (pc.whichAccepted()) {
                         case 0: //id
                             if (0 <= m_vx.getId()) {
@@ -155,7 +155,7 @@ public class Parser {
                         default:
                             assert false;
                     }
-                break;
+                    break;
                 default:
                     assert false;
             }
@@ -180,6 +180,14 @@ public class Parser {
                 error("PG-VX-3", getMark(), "design", cellNm);
             }
         });
+        EdgeStart.addListener((Acceptor accepted) -> {
+            m_acc = accepted;
+            try {
+                m_graph.setVerticesById();
+            } catch (PartitionException ex) {
+                ex.asError();
+            }
+        });
     }
 
     private String getMark() {
@@ -196,7 +204,7 @@ public class Parser {
     private static float toFloat(final PgFloat val) {
         return Float.parseFloat(val.toString());
     }
-    
+
     private Name asName(final PgName nm) {
         int ix = -1;
         List<String> baseNm = asFullName(extractEle(nm.getBaseAccepted(), 0));
