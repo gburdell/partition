@@ -23,10 +23,26 @@
  */
 package partition;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Graph edge.
  * @author gburdell
  */
 public class Edge {
+    public Edge(final Name name) {
+        m_name = name;
+    }
     
+    public void addVertex(final Vertex vx) {
+        
+    }
+    
+    public Name getName() {
+        return m_name;
+    }
+    
+    private final Name  m_name;
+    private final List<Vertex>  m_vertices = new LinkedList<>();
 }

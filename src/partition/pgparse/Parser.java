@@ -36,12 +36,14 @@ import static apfe.runtime.Util.extractEle;
 import static apfe.runtime.Util.extractList;
 import gblib.Util;
 import static gblib.Util.downCast;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import partition.Edge;
 import partition.Graph;
 import partition.Name;
 import partition.PartitionException;
@@ -56,6 +58,7 @@ import partition.pgparse.generated.FullName;
 import partition.pgparse.generated.Grammar;
 import partition.pgparse.generated.NameEle;
 import partition.pgparse.generated.NameMapEntry;
+import partition.pgparse.generated.PgEdge;
 import partition.pgparse.generated.PgFloat;
 import partition.pgparse.generated.PgInteger;
 import partition.pgparse.generated.PgName;
@@ -188,6 +191,34 @@ public class Parser {
                 ex.asError();
             }
         });
+        PgEdge.addListener((Acceptor accepted) -> {
+            m_acc = accepted;
+            //PgEdge <- PgName COLON PgInteger (COMMA PgInteger)* Semi
+            Edge edge = new Edge(asName(extractEle(m_acc, 0)));
+            if (false == m_graph.addEdge(edge)) {
+                error("PG-VX-5", getMark(), edge.getName().toString());
+            } 
+            //we'll track nodes here
+            boolean used[] = new boolean[m_graph.getVxById().length];
+            Arrays.fill(used, false);
+            int node = toInt(extractEle(m_acc, 2));
+            addNode(edge, node, used);
+            final Repetition nodes = extractEle(m_acc, 3);
+            if ((null != nodes) && (0 < nodes.sizeofAccepted())) {
+            for (Acceptor pgi : extractList(nodes, 1)) {
+                node = toInt(downCast(pgi));
+                addNode(edge, node, used);
+            }
+            }
+        });
+    }
+    
+    private void addNode(final Edge edge, final int node, final boolean used[]) {
+        if (used[node]) {
+            error("PG-VX-6", getMark(), edge.getName().toString(), node);
+        }
+        edge.addVertex(m_graph.getVxById()[node]);
+        used[node] = true;
     }
 
     private String getMark() {

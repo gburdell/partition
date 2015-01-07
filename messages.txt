@@ -10,3 +10,5 @@ PG-VX-1 %s: cell/vertex with name '%s' already exists
 PG-VX-2 %s: field '%s' already set to '%s'
 PG-VX-3 %s: field '%s' was not set for cell/vertex '%s'
 PG-VX-4 %s: field 'id' value %d must be > 0
+PG-VX-5 %s: edge with name '%s' already exists
+PG-VX-6 %s: edge '%s' already has cell/vertex with id '%d'

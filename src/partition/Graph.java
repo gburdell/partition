@@ -45,6 +45,18 @@ public class Graph {
         return true;
     }
     
+    public boolean addEdge(final Edge edge) {
+        if (m_edgeByName.containsKey(edge.getName())) {
+            return false;
+        }
+        m_edgeByName.put(edge.getName(), edge);
+        return true;        
+    }
+    
+    public Vertex[] getVxById() {
+        return m_vxById;
+    }
+    
     public void setVerticesById() throws PartitionException {
         if (null != m_vxById) {
             gblib.Util.abnormalExit("m_vxById already set");
@@ -74,4 +86,8 @@ public class Graph {
      * Vertices by id (which is reference in edge set).
      */
     private Vertex  m_vxById[];
+    /**
+     * Edges by name.
+     */
+    private final Map<Name,Edge>    m_edgeByName = new HashMap<>();
 }
