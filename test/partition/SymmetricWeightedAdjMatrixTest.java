@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 gburdell.
+ * Copyright 2015 gburdell.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,60 +23,43 @@
  */
 package partition;
 
-import java.util.LinkedList;
 import java.util.List;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import partition.SymmetricWeightedAdjMatrix.Ele;
 
 /**
- * Graph edge.
  *
  * @author gburdell
  */
-public class Edge {
-
-    public Edge(final Name name) {
-        m_name = name;
-    }
-
+public class SymmetricWeightedAdjMatrixTest {
+    
     /**
-     * Add vertex to this edge.
-     *
-     * @param vx vertex to add.
+     * Test of set method, of class SymmetricWeightedAdjMatrix.
      */
-    public void addVertex(final Vertex vx) {
-        m_vertices.add(vx);
-    }
-
-    public Name getName() {
-        return m_name;
-    }
-
-    /**
-     * Test if this edge is connected to a specific Vertex.
-     *
-     * @param vx vertex to check.
-     * @return true if edge is connected to vertex.
-     */
-    public boolean containsVertex(final Vertex vx) {
-        return m_vertices.contains(vx);
-    }
-
-    /**
-     * Test if this edge connects to specified vertices.
-     * @param vxs vertices to check for adjacency.
-     * @return true if all vertices adjacent.
-     */
-    public boolean adjacent(final Vertex... vxs) {
-        for (Vertex vx : vxs) {
-            if (! containsVertex(vx)) {
-                return false;
+    @Test
+    public void testSet() {
+        System.out.println("set");
+        final int n = 4;
+        SymmetricWeightedAdjMatrix<Integer> mat = new SymmetricWeightedAdjMatrix<>(n,0);
+        int val = 1;
+        for (int row = 0; row < n; row++) {
+            for (int col = row+1; col < n; col++) {
+                mat.set(row, col, val++);
             }
         }
-        return true;
+        val = 1;
+        for (int row = 0; row < n; row++) {
+            for (int col = row+1; col < n; col++) {
+                assertTrue(val++ == mat.get(row, col));
+            }
+        }
+        System.out.println(mat.toString());
+        List<Ele<Integer>> sorted = mat.sort();
     }
-
-    private final Name m_name;
-    /**
-     * Collection of vertices connected by this edge.
-     */
-    private final List<Vertex> m_vertices = new LinkedList<>();
+    
 }

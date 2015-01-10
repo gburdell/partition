@@ -5,14 +5,17 @@
         <group>
             <file>file:/home/gburdell/projects/partition/src/partition/PartitionException.java</file>
             <file>file:/home/gburdell/projects/partition/src/partition/Edge.java</file>
-            <file>file:/home/gburdell/projects/partition/src/partition/Vertex.java</file>
-            <file>file:/home/gburdell/projects/partition/src/partition/pgparse/Parser.java</file>
+            <file>file:/home/gburdell/projects/partition/test/partition/SymmetricWeightedAdjMatrixTest.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/SymmetricWeightedAdjMatrix.java</file>
             <file>file:/home/gburdell/projects/partition/src/partition/Util.java</file>
-            <file>file:/home/gburdell/projects/partition/src/partition/Graph.java</file>
             <file>file:/home/gburdell/projects/partition/src/partition/pgparse/generated/EdgeStart.java</file>
             <file>file:/home/gburdell/projects/partition/src/partition/Main.java</file>
-            <file>file:/home/gburdell/projects/partition/src/partition/pgparse/generated/PgEdge.java</file>
             <file>file:/home/gburdell/projects/partition/src/partition/pgparse/generated/PgInteger.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/Vertex.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/pgparse/Parser.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/Graph.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/Name.java</file>
+            <file>file:/home/gburdell/projects/partition/src/partition/pgparse/generated/PgEdge.java</file>
         </group>
     </open-files>
 </project-private>

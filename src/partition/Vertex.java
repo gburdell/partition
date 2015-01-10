@@ -23,6 +23,9 @@
  */
 package partition;
 
+import static gblib.Util.downCast;
+import java.util.Objects;
+
 /**
  * Graph Vertex.
  * @author gburdell
@@ -76,6 +79,20 @@ public class Vertex {
         this.m_designName = m_designName;
     }
 
+    @Override
+    public boolean equals(final Object other) {
+        if (other instanceof Vertex) {
+            final Vertex asVx = downCast(other);
+            return getId() == asVx.getId();
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId();
+    }
+    
     private final Name    m_name;
     private Name m_designName;
     private int m_id = -1, m_leafCnt = -1, m_macroCnt = -1;
